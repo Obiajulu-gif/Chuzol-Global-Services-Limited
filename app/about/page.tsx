@@ -34,10 +34,10 @@ export default function AboutPage() {
   const team = [
 		{
 			name: "Oliver Ilozor",
-			position: "Chief Executive Officer",
+			position: "Founder/ Chief Executive Officer",
 			image: "/images/founder.png",
 			description:
-				"20+ years experience in agricultural export and international trade.",
+				"A 2008 graduate of Applied chemistry from university of Uyo Nigeria  with varieties of training and certifications in business models. He is an experience and creative entrepreneur with wide experiences in both private and public sectors.",
 		},
 	];
 
@@ -260,7 +260,7 @@ export default function AboutPage() {
 									products, connecting local farmers to global markets while
 									maintaining the highest standards of quality, sustainability,
 									and customer satisfaction. We strive to showcase the best of
-									Nigerian agriculture to the world.
+									Africa's agriculture to the world.
 								</p>
 							</CardContent>
 						</Card>
@@ -375,7 +375,15 @@ export default function AboutPage() {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<div
+						className={`grid grid-cols-1 md:grid-cols-${Math.min(
+							2,
+							team.length
+						)} lg:grid-cols-${Math.min(4, team.length)} gap-8 ${
+							team.length === 1 ? "justify-center max-w-xs mx-auto" : ""
+						}`}
+					>
+						{" "}
 						{team.map((member, index) => (
 							<Card
 								key={index}
