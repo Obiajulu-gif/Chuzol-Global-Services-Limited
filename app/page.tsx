@@ -153,7 +153,7 @@ export default function HomePage() {
       {/* Enhanced Hero Section */}
       <section
         ref={heroRef}
-        className="relative bg-gradient-to-br from-green-700 via-green-800 to-green-900 text-white overflow-hidden min-h-[90vh]"
+        className="relative bg-gradient-to-br from-green-700 via-green-800 to-green-900  overflow-hidden min-h-[90vh]"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -183,9 +183,9 @@ export default function HomePage() {
                 </Badge>
 
                 <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                  <span className="block">Premium</span>
-                  <span className="block text-yellow-400 animate-fade-in-right">Nigerian</span>
-                  <span className="block">Exports</span>
+                  <span className="block text-white">Premium</span>
+                  <span className="text-yellow-400 animate-fade-in-right">Nigerian</span>
+                  <span className="block text-white">Exports</span>
                 </h1>
 
                 <p className="text-xl lg:text-2xl text-green-100 leading-relaxed max-w-2xl">
@@ -209,16 +209,16 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-green-800 px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg"
+                    className="border-2 border-white text-green hover:bg-white hover:text-green-800 px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg"
                   >
                     <Globe className="mr-2 h-5 w-5" />
-                    Get Export Quote
+                    Get Export Quotes
                   </Button>
                 </Link>
               </div>
 
               {/* Enhanced Trust Indicators */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-8 text-white">
                 <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-lg p-3">
                   <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
                   <span className="text-sm font-medium">ISO Certified</span>
@@ -254,7 +254,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-2xl"></div>
 
                 {/* Floating Stats Cards */}
-                <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg animate-bounce">
+                <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-700">25+</div>
                     <div className="text-sm text-gray-600">Countries</div>
@@ -268,9 +268,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="absolute top-1/2 -left-4 bg-green-600/95 backdrop-blur-sm rounded-xl p-3 shadow-lg transform -translate-y-1/2 animate-bounce delay-500">
-                  <Globe className="h-8 w-8 text-white" />
-                </div>
+                
               </div>
 
               {/* Background decorative elements */}
@@ -281,12 +279,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Bottom wave decoration */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-          <svg className="relative block w-full h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="fill-gray-50"></path>
-          </svg>
-        </div>
+        
       </section>
 
       {/* Stats Section */}
@@ -511,7 +504,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-green-800 transform hover:scale-105 transition-all duration-200"
+                className="border-white text-green-800 hover:bg-white hover:text-green-800 transform hover:scale-105 transition-all duration-200"
               >
                 Download Catalog
               </Button>

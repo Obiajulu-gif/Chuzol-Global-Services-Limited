@@ -38,24 +38,7 @@ export default function AboutPage() {
       image: "/placeholder.svg?height=300&width=300",
       description: "20+ years experience in agricultural export and international trade.",
     },
-    {
-      name: "Fatima Abdullahi",
-      position: "Head of Operations",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Expert in supply chain management and quality control processes.",
-    },
-    {
-      name: "Emeka Okafor",
-      position: "International Sales Director",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Specialist in global market development and customer relations.",
-    },
-    {
-      name: "Aisha Mohammed",
-      position: "Quality Assurance Manager",
-      image: "/placeholder.svg?height=300&width=300",
-      description: "Ensures all products meet international quality standards.",
-    },
+    
   ]
 
   const achievements = [
@@ -125,7 +108,7 @@ export default function AboutPage() {
             <div className="relative lg:h-[500px] h-[350px]">
               <div className="relative z-10 h-full">
                 <Image
-                  src="/images/about-hero.png"
+                  src="/images/export-hero.png"
                   alt="Chuzol Global - Our Story and Mission"
                   fill
                   className="object-cover rounded-2xl shadow-2xl"
@@ -162,12 +145,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Bottom wave decoration */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-          <svg className="relative block w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" className="fill-white"></path>
-          </svg>
-        </div>
+        
       </section>
 
       {/* Company Story */}
