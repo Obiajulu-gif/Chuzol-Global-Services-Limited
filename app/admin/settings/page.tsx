@@ -16,15 +16,15 @@ import { toast } from "sonner"
 
 export default function SettingsPage() {
   const [storeSettings, setStoreSettings] = useState({
-    storeName: "Chuzol Global Service Limited",
-    storeDescription: "Premium African agricultural products and organic goods",
-    storeEmail: "info@chuzolglobal.com",
-    storePhone: "+234 123 456 7890",
-    storeAddress: "Lagos, Nigeria",
-    currency: "USD",
-    timezone: "Africa/Lagos",
-    language: "en",
-  })
+		storeName: "Chuzol Global Service Limited",
+		storeDescription: "Premium Africa's agricultural products and organic goods",
+		storeEmail: "chuzolglobal@gmail.com",
+		storePhone: "+234 806 834 0120",
+		storeAddress: "Port-Harcourt, River State, Nigeria",
+		currency: "USD",
+		timezone: "Africa/Lagos",
+		language: "en",
+	});
 
   const [notifications, setNotifications] = useState({
     emailOrders: true,
