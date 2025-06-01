@@ -22,7 +22,7 @@ export default function AboutPage() {
     {
       icon: <Heart className="h-8 w-8 text-green-600" />,
       title: "Sustainability",
-      description: "We promote sustainable farming practices and support local communities in Africa.",
+      description: "We promote sustainable farming practices and support local communities in Nigeria.",
     },
     {
       icon: <Truck className="h-8 w-8 text-green-600" />,

@@ -19,21 +19,17 @@ const contactInfo = [
 	{
 		icon: <MapPin className="h-6 w-6 text-green-600" />,
 		title: "Head Office",
-		details: [
-			"No 7 Amadi Ejekwu Close,",
-			"Port-Harcourt, River State",
-			"Nigeria",
-		],
+		details: ["123 Export Plaza", "Victoria Island, Lagos", "Nigeria"],
 	},
 	{
 		icon: <Phone className="h-6 w-6 text-green-600" />,
 		title: "Phone Numbers",
-		details: ["+234 806 834 0120", "WhatsApp: +234 806 834 0120"],
+		details: ["+234 123 456 789", "WhatsApp: +234 806 834 0120"],
 	},
 	{
 		icon: <Mail className="h-6 w-6 text-green-600" />,
 		title: "Email Addresses",
-		details: ["chuzolglobal@gmail.com", "oliver@chuzolglobal.com"],
+		details: ["info@chuzolglobal.com", "sales@chuzolglobal.com", "support@chuzolglobal.com"],
 	},
 	{
 		icon: <Clock className="h-6 w-6 text-green-600" />,
