@@ -77,32 +77,52 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [error, setError] = useState("")
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    setError("") // Clear error when user starts typing
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError("")
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitting(false)
-    setShowSuccess(true)
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      subject: "",
-      message: "",
-      inquiryType: "",
-    })
+      const data = await response.json()
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setShowSuccess(false), 5000)
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message")
+      }
+
+      setShowSuccess(true)
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        message: "",
+        inquiryType: "",
+      })
+
+      // Hide success message after 5 seconds
+      setTimeout(() => setShowSuccess(false), 5000)
+    } catch (error) {
+      console.error("Contact form error:", error)
+      setError(error instanceof Error ? error.message : "Failed to send message")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -169,6 +189,12 @@ export default function ContactPage() {
                     <AlertDescription className="text-green-800">
                       Thank you for your message! We'll get back to you within 24 hours.
                     </AlertDescription>
+                  </Alert>
+                )}
+
+                {error && (
+                  <Alert className="mb-6 border-red-200 bg-red-50">
+                    <AlertDescription className="text-red-800">{error}</AlertDescription>
                   </Alert>
                 )}
 

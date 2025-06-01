@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, CreditCard, Truck, Shield } from "lucide-react"
+import { ArrowLeft, Truck, Shield } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -19,12 +19,13 @@ import { useCart } from "@/lib/cart-context"
 import { useRouter } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function CheckoutPage() {
   const { state, dispatch } = useCart()
   const router = useRouter()
   const [isProcessing, setIsProcessing] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
+  const [error, setError] = useState("")
 
   const [formData, setFormData] = useState({
     // Contact Information
@@ -41,12 +42,6 @@ export default function CheckoutPage() {
     zipCode: "",
     country: "",
 
-    // Payment Information
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    cardName: "",
-
     // Additional Information
     orderNotes: "",
     agreeToTerms: false,
@@ -60,18 +55,45 @@ export default function CheckoutPage() {
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    setError("") // Clear error when user starts typing
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsProcessing(true)
+    setError("")
 
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    try {
+      const orderData = {
+        ...formData,
+        items: state.items,
+      }
 
-    // Clear cart and redirect to success page
-    dispatch({ type: "CLEAR_CART" })
-    router.push("/checkout/success")
+      const response = await fetch("/api/orders/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create order")
+      }
+
+      // Clear cart
+      dispatch({ type: "CLEAR_CART" })
+
+      // Redirect to Paystack payment page
+      window.location.href = data.paymentUrl
+    } catch (error) {
+      console.error("Checkout error:", error)
+      setError(error instanceof Error ? error.message : "Failed to process order")
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   if (state.items.length === 0) {
@@ -107,25 +129,26 @@ export default function CheckoutPage() {
         {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex items-center justify-center space-x-4">
-            {[1, 2, 3].map((step) => (
+            {[1, 2].map((step) => (
               <div key={step} className="flex items-center">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    step <= currentStep ? "bg-green-700 text-white" : "bg-gray-200 text-gray-600"
-                  }`}
-                >
+                <div className="w-8 h-8 bg-green-700 text-white rounded-full flex items-center justify-center text-sm font-medium">
                   {step}
                 </div>
                 <span className="ml-2 text-sm font-medium text-gray-600">
-                  {step === 1 && "Information"}
-                  {step === 2 && "Shipping"}
-                  {step === 3 && "Payment"}
+                  {step === 1 && "Information & Shipping"}
+                  {step === 2 && "Payment"}
                 </span>
-                {step < 3 && <div className="w-12 h-px bg-gray-300 mx-4" />}
+                {step < 2 && <div className="w-12 h-px bg-gray-300 mx-4" />}
               </div>
             ))}
           </div>
         </div>
+
+        {error && (
+          <Alert className="mb-6 border-red-200 bg-red-50">
+            <AlertDescription className="text-red-800">{error}</AlertDescription>
+          </Alert>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -266,68 +289,6 @@ export default function CheckoutPage() {
                 </CardContent>
               </Card>
 
-              {/* Payment Information */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-green-700 text-white rounded-full flex items-center justify-center text-sm">
-                      3
-                    </div>
-                    Payment Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-4 mb-4">
-                    <CreditCard className="h-5 w-5 text-gray-600" />
-                    <span className="text-sm text-gray-600">We accept all major credit cards</span>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="cardNumber">Card Number *</Label>
-                    <Input
-                      id="cardNumber"
-                      placeholder="1234 5678 9012 3456"
-                      value={formData.cardNumber}
-                      onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="expiryDate">Expiry Date *</Label>
-                      <Input
-                        id="expiryDate"
-                        placeholder="MM/YY"
-                        value={formData.expiryDate}
-                        onChange={(e) => handleInputChange("expiryDate", e.target.value)}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="cvv">CVV *</Label>
-                      <Input
-                        id="cvv"
-                        placeholder="123"
-                        value={formData.cvv}
-                        onChange={(e) => handleInputChange("cvv", e.target.value)}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="cardName">Name on Card *</Label>
-                    <Input
-                      id="cardName"
-                      value={formData.cardName}
-                      onChange={(e) => handleInputChange("cardName", e.target.value)}
-                      required
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
               {/* Additional Information */}
               <Card>
                 <CardHeader>
@@ -432,7 +393,7 @@ export default function CheckoutPage() {
                   <div className="space-y-2 text-xs text-gray-600">
                     <div className="flex items-center gap-2">
                       <Shield className="h-3 w-3" />
-                      <span>SSL Encrypted Checkout</span>
+                      <span>Secure Payment with Paystack</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Truck className="h-3 w-3" />
@@ -456,6 +417,10 @@ export default function CheckoutPage() {
                       `Place Order - $${finalTotal.toFixed(2)}`
                     )}
                   </Button>
+
+                  <p className="text-xs text-gray-500 text-center">
+                    You'll be redirected to Paystack to complete your payment securely
+                  </p>
                 </CardContent>
               </Card>
             </div>
