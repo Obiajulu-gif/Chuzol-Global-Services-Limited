@@ -29,7 +29,7 @@ const contactInfo = [
 	{
 		icon: <Mail className="h-6 w-6 text-green-600" />,
 		title: "Email Addresses",
-		details: ["info@chuzolglobal.com", "sales@chuzolglobal.com", "support@chuzolglobal.com"],
+		details: ["info@chuzol.com", "sales@chuzol.com", "support@chuzol.com"],
 	},
 	{
 		icon: <Clock className="h-6 w-6 text-green-600" />,

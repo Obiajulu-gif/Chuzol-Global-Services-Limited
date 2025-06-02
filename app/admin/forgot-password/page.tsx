@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     className="mt-1"
-                    placeholder="admin@chuzolglobal.com"
+                    placeholder="admin@chuzol.com"
                     disabled={isLoading}
                   />
                 </div>

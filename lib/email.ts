@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function sendPasswordResetEmail(email: string, name: string, resetLink: string, token: string) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Chuzol Global <noreply@chuzolglobal.com>",
+      from: "Chuzol Global <noreply@chuzol.com>",
       to: [email],
       subject: "Password Reset Request - Chuzol Global Admin",
       html: `
@@ -50,7 +50,7 @@ export async function sendPasswordResetEmail(email: string, name: string, resetL
               <p style="color: #6b7280; font-size: 14px;">
                 Best regards,<br>
                 The Chuzol Global Team<br>
-                <a href="mailto:admin@chuzolglobal.com" style="color: #16a34a;">admin@chuzolglobal.com</a>
+                <a href="mailto:admin@chuzol.com" style="color: #16a34a;">admin@chuzol.com</a>
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@ export async function sendContactEmail(formData: {
 }) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Chuzol Contact Form <noreply@chuzolglobal.com>",
+      from: "Chuzol Contact Form <noreply@chuzol.com>",
       to: ["anigbomosesstan@gmail.com"],
       replyTo: [formData.email],
       subject: `New Contact Form Submission: ${formData.subject}`,
@@ -194,7 +194,7 @@ export async function sendOrderConfirmationEmail(
 ) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Chuzol Global <orders@chuzolglobal.com>",
+      from: "Chuzol Global <orders@chuzol.com>",
       to: [email],
       subject: `Order Confirmation - ${orderData.orderNumber}`,
       html: `
@@ -259,7 +259,7 @@ export async function sendOrderConfirmationEmail(
               
               <p style="color: #6b7280; font-size: 14px;">
                 Questions about your order? Contact us at:<br>
-                <a href="mailto:orders@chuzolglobal.com" style="color: #16a34a;">orders@chuzolglobal.com</a><br>
+                <a href="mailto:orders@chuzol.com" style="color: #16a34a;">orders@chuzol.com</a><br>
                 Phone: +234 123 456 7890
               </p>
             </div>
@@ -294,7 +294,7 @@ export async function sendPaymentSuccessEmail(
 ) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Chuzol Global <orders@chuzolglobal.com>",
+      from: "Chuzol Global <orders@chuzol.com>",
       to: [email],
       subject: `Payment Confirmed - Order ${orderData.orderNumber}`,
       html: `
@@ -362,7 +362,7 @@ export async function sendPaymentSuccessEmail(
               
               <p style="color: #6b7280; font-size: 14px;">
                 Questions about your order? Contact us at:<br>
-                <a href="mailto:orders@chuzolglobal.com" style="color: #16a34a;">orders@chuzolglobal.com</a><br>
+                <a href="mailto:orders@chuzol.com" style="color: #16a34a;">orders@chuzol.com</a><br>
                 Phone: +234 123 456 7890
               </p>
             </div>

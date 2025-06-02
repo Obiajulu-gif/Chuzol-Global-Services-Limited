@@ -47,10 +47,10 @@ export default function AdminLoginPage() {
 
   const fillCredentials = (userType: "admin" | "manager") => {
     if (userType === "admin") {
-      setEmail("admin@chuzolglobal.com")
+      setEmail("admin@chuzol.com")
       setPassword("admin123")
     } else {
-      setEmail("manager@chuzolglobal.com")
+      setEmail("manager@chuzol.com")
       setPassword("manager123")
     }
   }
@@ -94,7 +94,7 @@ export default function AdminLoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="mt-1"
-                  placeholder="admin@chuzolglobal.com"
+                  placeholder="admin@chuzol.com"
                 />
               </div>
 

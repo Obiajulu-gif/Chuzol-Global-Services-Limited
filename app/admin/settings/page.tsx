@@ -18,7 +18,7 @@ export default function SettingsPage() {
   const [storeSettings, setStoreSettings] = useState({
 		storeName: "Chuzol Global Service Limited",
 		storeDescription: "Premium African agricultural products and organic goods",
-		storeEmail: "info@chuzolglobal.com",
+		storeEmail: "info@chuzol.com",
 		storePhone: "+234 123 456 7890",
 		storeAddress: "Lagos, Nigeria",
 		currency: "USD",

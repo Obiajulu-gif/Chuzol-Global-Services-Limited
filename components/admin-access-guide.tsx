@@ -13,13 +13,13 @@ export function AdminAccessGuide() {
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
   const adminCredentials = {
-    email: "admin@chuzolglobal.com",
+    email: "admin@chuzol.com",
     password: "admin123",
     role: "Admin (Full Access)",
   }
 
   const managerCredentials = {
-    email: "manager@chuzolglobal.com",
+    email: "manager@chuzol.com",
     password: "manager123",
     role: "Manager (Limited Access)",
   }

@@ -230,7 +230,7 @@ export default function AdminSetupPage() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="admin@chuzolglobal.com"
+                      placeholder="admin@chuzol.com"
                       required
                     />
                   </div>
@@ -335,7 +335,7 @@ export default function AdminSetupPage() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="john@chuzolglobal.com"
+                      placeholder="john@chuzol.com"
                       required
                     />
                   </div>
