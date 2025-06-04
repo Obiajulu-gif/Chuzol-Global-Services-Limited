@@ -202,7 +202,7 @@ export default function HomePage() {
 								<Link href="/products">
 									<Button
 										size="lg"
-										className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-8 py-4 text-lg group transform hover:scale-105 transition-all duration-300 shadow-lg"
+										className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-4 text-lg group transform hover:scale-105 transition-all duration-300 shadow-lg"
 									>
 										<Package className="mr-2 h-5 w-5" />
 										Explore Products

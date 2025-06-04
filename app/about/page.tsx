@@ -1,37 +1,53 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Award, Users, Globe, Target, Eye, Heart, Truck, Shield, CheckCircle, Building, Handshake } from "lucide-react"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import Image from "next/image";
+import {
+	Award,
+	Users,
+	Globe,
+	Target,
+	Eye,
+	Heart,
+	Truck,
+	Shield,
+	CheckCircle,
+	Building,
+	Handshake,
+} from "lucide-react";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function AboutPage() {
-  const values = [
-    {
-      icon: <Shield className="h-8 w-8 text-green-600" />,
-      title: "Quality Assurance",
-      description: "We maintain the highest standards in processing and packaging to ensure premium quality products.",
-    },
-    {
-      icon: <Globe className="h-8 w-8 text-green-600" />,
-      title: "Global Reach",
-      description: "Our extensive network spans across continents, connecting Nigerian agriculture to world markets.",
-    },
-    {
-      icon: <Heart className="h-8 w-8 text-green-600" />,
-      title: "Sustainability",
-      description: "We promote sustainable farming practices and support local communities in Nigeria.",
-    },
-    {
-      icon: <Truck className="h-8 w-8 text-green-600" />,
-      title: "Reliable Delivery",
-      description: "Timely and secure delivery of products to our customers worldwide.",
-    },
-  ]
+	const values = [
+		{
+			icon: <Shield className="h-8 w-8 text-green-600" />,
+			title: "Quality Assurance",
+			description:
+				"We maintain the highest standards in processing and packaging to ensure premium quality products.",
+		},
+		{
+			icon: <Globe className="h-8 w-8 text-green-600" />,
+			title: "Global Reach",
+			description:
+				"Our extensive network spans across continents, connecting Nigerian agriculture to world markets.",
+		},
+		{
+			icon: <Heart className="h-8 w-8 text-green-600" />,
+			title: "Sustainability",
+			description:
+				"We promote sustainable farming practices and support local communities in Nigeria.",
+		},
+		{
+			icon: <Truck className="h-8 w-8 text-green-600" />,
+			title: "Reliable Delivery",
+			description:
+				"Timely and secure delivery of products to our customers worldwide.",
+		},
+	];
 
-  const team = [
+	const team = [
 		{
 			name: "Oliver Ilozor",
 			position: "Founder/ Chief Executive Officer",
@@ -41,14 +57,20 @@ export default function AboutPage() {
 		},
 	];
 
-  const achievements = [
-    { icon: <Award className="h-6 w-6" />, text: "CAC Licensed Company - July 2024" },
-    { icon: <Globe className="h-6 w-6" />, text: "Exporting to 25+ Countries" },
-    { icon: <Users className="h-6 w-6" />, text: "500+ Satisfied Customers" },
-    { icon: <CheckCircle className="h-6 w-6" />, text: "ISO Quality Certified" },
-  ]
+	const achievements = [
+		{
+			icon: <Award className="h-6 w-6" />,
+			text: "CAC Licensed Company - July 2024",
+		},
+		{ icon: <Globe className="h-6 w-6" />, text: "Exporting to 25+ Countries" },
+		{ icon: <Users className="h-6 w-6" />, text: "500+ Satisfied Customers" },
+		{
+			icon: <CheckCircle className="h-6 w-6" />,
+			text: "ISO Quality Certified",
+		},
+	];
 
-  return (
+	return (
 		<div className="min-h-screen bg-white">
 			<Navbar />
 
