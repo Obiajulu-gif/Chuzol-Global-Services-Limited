@@ -57,39 +57,39 @@ export default function HomePage() {
   }, [])
 
   const featuredProducts = [
-    {
-      name: "Premium Bitter Kola",
-      image: "/images/bitter-kola.png",
-      description: "High-quality bitter kola sourced from Nigerian forests",
-      category: "Nuts & Seeds",
-      price: "$25.99",
-      rating: 4.8,
-    },
-    {
-      name: "Organic Shea Butter",
-      image: "/images/shea-butter.png",
-      description: "Pure, unrefined shea butter from Northern Nigeria",
-      category: "Organic Products",
-      price: "$18.50",
-      rating: 4.9,
-    },
-    {
-      name: "Premium Cashew Nuts",
-      image: "/images/cashew-nuts.png",
-      description: "Grade A cashew nuts for international markets",
-      category: "Nuts & Seeds",
-      price: "$32.00",
-      rating: 4.7,
-    },
-    {
-      name: "Dried Hibiscus Flowers",
-      image: "/images/hibiscus.png",
-      description: "Premium quality hibiscus for tea and beverages",
-      category: "Herbs & Spices",
-      price: "$12.75",
-      rating: 4.6,
-    },
-  ]
+		{
+			name: "Premium Bitter Kola",
+			image: "/images/kolanut.jpeg",
+			description: "High-quality bitter kola sourced from Nigerian forests",
+			category: "Nuts & Seeds",
+			price: "$25.99",
+			rating: 4.8,
+		},
+		{
+			name: "Organic SheaNut",
+			image: "/images/sheanut.jpg",
+			description: "Pure, unrefined shea butter from Northern Nigeria",
+			category: "Organic Products",
+			price: "$18.50",
+			rating: 4.9,
+		},
+		{
+			name: "Premium Cashew Nuts",
+			image: "/images/cashew1.jpg",
+			description: "Grade A cashew nuts for international markets",
+			category: "Nuts & Seeds",
+			price: "$32.00",
+			rating: 4.7,
+		},
+		{
+			name: "Dried Hibiscus Flowers",
+			image: "/images/hibiscut.jpg",
+			description: "Premium quality hibiscus for tea and beverages",
+			category: "Herbs & Spices",
+			price: "$12.75",
+			rating: 4.6,
+		},
+	];
 
   const services = [
     {
