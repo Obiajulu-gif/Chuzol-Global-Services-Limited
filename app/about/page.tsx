@@ -122,7 +122,14 @@ export default function AboutPage() {
 								</div>
 								<div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
 									<div className="flex items-center space-x-2 mb-2">
-										<Globe className="h-5 w-5 text-yellow-400" />
+										{/* <Globe className="h-5 w-5 text-yellow-400" /> */}
+										<Image
+											src="/path/to/your-image.png"
+											alt="Globe image"
+											width={size === "sm" ? 16 : size === "md" ? 20 : 24}
+											height={size === "sm" ? 16 : size === "md" ? 20 : 24}
+											className={`text-white object-contain`}
+										/>
 										<span className="font-semibold">Global Reach</span>
 									</div>
 									<p className="text-sm text-green-100">
