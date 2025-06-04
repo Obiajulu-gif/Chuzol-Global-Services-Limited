@@ -36,9 +36,9 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
 						<Image
 							src="/images/chuzollogo.png"
 							alt="Globe image"
-							width={size === "sm" ? 16 : size === "md" ? 20 : 24}
-							height={size === "sm" ? 16 : size === "md" ? 20 : 24}
-							className={`text-white object-contain`}
+							width={20}
+							height={20}
+							className="text-white object-contain"
 						/>
 					</div>
 					{/* Circling Arrow Animation */}
@@ -48,8 +48,8 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
 								size === "sm"
 									? "w-4 h-4"
 									: size === "md"
-									? "w-5 h-5"
-									: "w-6 h-6"
+										? "w-5 h-5"
+										: "w-6 h-6"
 							} bg-yellow-400 rounded-full flex items-center justify-center animate-spin-slow`}
 						>
 							<ArrowRight
@@ -57,8 +57,8 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
 									size === "sm"
 										? "h-2 w-2"
 										: size === "md"
-										? "h-2.5 w-2.5"
-										: "h-3 w-3"
+											? "h-2.5 w-2.5"
+											: "h-3 w-3"
 								} text-green-800 transform rotate-45`}
 							/>
 						</div>
