@@ -36,13 +36,13 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
 						<Image
 							src="/images/chuzollogo.png"
 							alt="Globe image"
-							width={20}
-							height={20}
+							width={40}
+							height={40}
 							className="text-white object-contain"
 						/>
 					</div>
 					{/* Circling Arrow Animation */}
-					<div className="absolute -top-1 -right-1">
+					{/* <div className="absolute -top-1 -right-1">
 						<div
 							className={`${
 								size === "sm"
@@ -62,7 +62,7 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
 								} text-green-800 transform rotate-45`}
 							/>
 						</div>
-					</div>
+					</div> */}
 					{/* Pulsing Ring */}
 					<div className="absolute inset-0 rounded-lg border-2 border-green-400 animate-pulse opacity-50"></div>
 				</div>
