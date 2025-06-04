@@ -11,11 +11,18 @@ if (typeof window === "undefined") {
 }
 
 export const metadata: Metadata = {
-  title: "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
-  description:
-    "Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
-  generator: "v0.dev",
-}
+	title:
+		"Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
+	description:
+		"Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
+	icons: {
+		icon: [
+			{ url: "/images/chuzollogo.png" },
+			{ url: "/images/chuzollogo.png", type: "image/png" },
+		],
+		apple: [{ url: "/images/chuzollogo.png" }],
+	},
+};
 
 export default function RootLayout({
   children,

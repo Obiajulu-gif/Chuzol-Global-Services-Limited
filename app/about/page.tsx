@@ -1,5 +1,5 @@
 "use client";
-
+import Head from "next/head";
 import Image from "next/image";
 import {
 	Award,
@@ -72,6 +72,22 @@ export default function AboutPage() {
 
 	return (
 		<div className="min-h-screen bg-white">
+			<Head>
+				<title>About Chuzol - Your Trusted Agricultural Export Partner</title>
+				<meta
+					name="description"
+					content="Learn about Chuzol’s mission, team, and commitment to quality in agricultural exports from Nigeria to the world."
+				/>
+				<meta name="robots" content="index, follow" />
+				<link rel="canonical" href="https://www.chuzol.com/about" />
+				<meta property="og:title" content="About Chuzol" />
+				<meta
+					property="og:description"
+					content="We are committed to providing world-class agricultural exports with full traceability and top-tier logistics."
+				/>
+				<meta property="og:url" content="https://www.chuzol.com/about" />
+				<meta property="og:type" content="website" />
+			</Head>
 			<Navbar />
 
 			{/* Enhanced Hero Section */}
@@ -123,7 +139,7 @@ export default function AboutPage() {
 								<div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
 									<div className="flex items-center space-x-2 mb-2">
 										<Globe className="h-5 w-5 text-yellow-400" />
-										
+
 										<span className="font-semibold">Global Reach</span>
 									</div>
 									<p className="text-sm text-green-100">

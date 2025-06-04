@@ -22,6 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import Head from "next/head";
 
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -254,255 +255,313 @@ const ProductsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+		<div className="min-h-screen bg-gray-50">
+			<Navbar />
+			<Head>
+				<title>Our Products - Premium Nigerian Agricultural Exports</title>
+				<meta
+					name="description"
+					content="Browse our range of premium Nigerian agricultural exports including nuts, herbs, spices, and more."
+				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Our Products</h1>
-              <p className="text-gray-600 mt-1">Premium Nigerian agricultural exports</p>
-            </div>
-            <Link href="/">
-              <Button variant="outline">← Back to Home</Button>
-            </Link>
-          </div>
+			{/* Header */}
+			<div className="bg-white shadow-sm border-b">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+					<div className="flex items-center justify-between mb-4">
+						<div>
+							<h1 className="text-3xl font-bold text-gray-900">Our Products</h1>
+							<p className="text-gray-600 mt-1">
+								Premium Nigerian agricultural exports
+							</p>
+						</div>
+						<Link href="/">
+							<Button variant="outline">← Back to Home</Button>
+						</Link>
+					</div>
 
-          {/* Search and Filters */}
-          <div className="flex flex-col lg:flex-row gap-4">
-            {/* Search */}
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+					{/* Search and Filters */}
+					<div className="flex flex-col lg:flex-row gap-4">
+						{/* Search */}
+						<div className="relative flex-1">
+							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+							<Input
+								placeholder="Search products..."
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+								className="pl-10"
+							/>
+						</div>
 
-            {/* Category Filter */}
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full lg:w-48">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
-                    {category}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+						{/* Category Filter */}
+						<Select
+							value={selectedCategory}
+							onValueChange={setSelectedCategory}
+						>
+							<SelectTrigger className="w-full lg:w-48">
+								<SelectValue placeholder="Category" />
+							</SelectTrigger>
+							<SelectContent>
+								{categories.map((category) => (
+									<SelectItem key={category} value={category}>
+										{category}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
 
-            {/* Sort */}
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full lg:w-48">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="name">Name A-Z</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
-                <SelectItem value="rating">Highest Rated</SelectItem>
-              </SelectContent>
-            </Select>
+						{/* Sort */}
+						<Select value={sortBy} onValueChange={setSortBy}>
+							<SelectTrigger className="w-full lg:w-48">
+								<SelectValue placeholder="Sort by" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="name">Name A-Z</SelectItem>
+								<SelectItem value="price-low">Price: Low to High</SelectItem>
+								<SelectItem value="price-high">Price: High to Low</SelectItem>
+								<SelectItem value="rating">Highest Rated</SelectItem>
+							</SelectContent>
+						</Select>
 
-            {/* View Mode & Filters */}
-            <div className="flex gap-2">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="icon" className="lg:hidden">
-                    <Filter className="h-4 w-4" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                  <SheetHeader>
-                    <SheetTitle>Filters</SheetTitle>
-                    <SheetDescription>Filter products by your preferences</SheetDescription>
-                  </SheetHeader>
-                  <div className="space-y-4 mt-6">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="featured" checked={showFeaturedOnly} onCheckedChange={setShowFeaturedOnly} />
-                      <label htmlFor="featured" className="text-sm">
-                        Featured products only
-                      </label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="instock" checked={showInStockOnly} onCheckedChange={setShowInStockOnly} />
-                      <label htmlFor="instock" className="text-sm">
-                        In stock only
-                      </label>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
+						{/* View Mode & Filters */}
+						<div className="flex gap-2">
+							<Sheet>
+								<SheetTrigger asChild>
+									<Button variant="outline" size="icon" className="lg:hidden">
+										<Filter className="h-4 w-4" />
+									</Button>
+								</SheetTrigger>
+								<SheetContent side="left">
+									<SheetHeader>
+										<SheetTitle>Filters</SheetTitle>
+										<SheetDescription>
+											Filter products by your preferences
+										</SheetDescription>
+									</SheetHeader>
+									<div className="space-y-4 mt-6">
+										<div className="flex items-center space-x-2">
+											<Checkbox
+												id="featured"
+												checked={showFeaturedOnly}
+												onCheckedChange={setShowFeaturedOnly}
+											/>
+											<label htmlFor="featured" className="text-sm">
+												Featured products only
+											</label>
+										</div>
+										<div className="flex items-center space-x-2">
+											<Checkbox
+												id="instock"
+												checked={showInStockOnly}
+												onCheckedChange={setShowInStockOnly}
+											/>
+											<label htmlFor="instock" className="text-sm">
+												In stock only
+											</label>
+										</div>
+									</div>
+								</SheetContent>
+							</Sheet>
 
-              <div className="hidden lg:flex items-center gap-2">
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="featured-desktop" checked={showFeaturedOnly} onCheckedChange={setShowFeaturedOnly} />
-                  <label htmlFor="featured-desktop" className="text-sm">
-                    Featured
-                  </label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="instock-desktop" checked={showInStockOnly} onCheckedChange={setShowInStockOnly} />
-                  <label htmlFor="instock-desktop" className="text-sm">
-                    In Stock
-                  </label>
-                </div>
-              </div>
+							<div className="hidden lg:flex items-center gap-2">
+								<div className="flex items-center space-x-2">
+									<Checkbox
+										id="featured-desktop"
+										checked={showFeaturedOnly}
+										onCheckedChange={setShowFeaturedOnly}
+									/>
+									<label htmlFor="featured-desktop" className="text-sm">
+										Featured
+									</label>
+								</div>
+								<div className="flex items-center space-x-2">
+									<Checkbox
+										id="instock-desktop"
+										checked={showInStockOnly}
+										onCheckedChange={setShowInStockOnly}
+									/>
+									<label htmlFor="instock-desktop" className="text-sm">
+										In Stock
+									</label>
+								</div>
+							</div>
 
-              <div className="flex border rounded-md">
-                <Button
-                  variant={viewMode === "grid" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                  className="rounded-r-none"
-                >
-                  <Grid className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === "list" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                  className="rounded-l-none"
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+							<div className="flex border rounded-md">
+								<Button
+									variant={viewMode === "grid" ? "default" : "ghost"}
+									size="sm"
+									onClick={() => setViewMode("grid")}
+									className="rounded-r-none"
+								>
+									<Grid className="h-4 w-4" />
+								</Button>
+								<Button
+									variant={viewMode === "list" ? "default" : "ghost"}
+									size="sm"
+									onClick={() => setViewMode("list")}
+									className="rounded-l-none"
+								>
+									<List className="h-4 w-4" />
+								</Button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      {/* Results */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <p className="text-gray-600">
-            Showing {filteredProducts.length} of {products.length} products
-          </p>
-        </div>
+			{/* Results */}
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+				<div className="flex items-center justify-between mb-6">
+					<p className="text-gray-600">
+						Showing {filteredProducts.length} of {products.length} products
+					</p>
+				</div>
 
-        {/* Products Grid/List */}
-        {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredProducts.map((product) => (
-              <ProductListItem key={product.id} product={product} />
-            ))}
-          </div>
-        )}
+				{/* Products Grid/List */}
+				{viewMode === "grid" ? (
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+						{filteredProducts.map((product) => (
+							<ProductCard key={product.id} product={product} />
+						))}
+					</div>
+				) : (
+					<div className="space-y-4">
+						{filteredProducts.map((product) => (
+							<ProductListItem key={product.id} product={product} />
+						))}
+					</div>
+				)}
 
-        {/* Update the empty state message */}
-        {filteredProducts.length === 0 && !loading && (
-          <div className="text-center py-12">
-            <Package className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">
-              {products.length === 0 ? "No products available yet." : "No products found matching your criteria."}
-            </p>
-            {products.length === 0 ? (
-              <p className="text-gray-400 text-sm mt-2">Products will appear here once added by administrators.</p>
-            ) : (
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => {
-                  setSearchTerm("")
-                  setSelectedCategory("All Categories")
-                  setShowFeaturedOnly(false)
-                  setShowInStockOnly(false)
-                }}
-              >
-                Clear Filters
-              </Button>
-            )}
-          </div>
-        )}
-      </div>
+				{/* Update the empty state message */}
+				{filteredProducts.length === 0 && !loading && (
+					<div className="text-center py-12">
+						<Package className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+						<p className="text-gray-500 text-lg">
+							{products.length === 0
+								? "No products available yet."
+								: "No products found matching your criteria."}
+						</p>
+						{products.length === 0 ? (
+							<p className="text-gray-400 text-sm mt-2">
+								Products will appear here once added by administrators.
+							</p>
+						) : (
+							<Button
+								variant="outline"
+								className="mt-4"
+								onClick={() => {
+									setSearchTerm("");
+									setSelectedCategory("All Categories");
+									setShowFeaturedOnly(false);
+									setShowInStockOnly(false);
+								}}
+							>
+								Clear Filters
+							</Button>
+						)}
+					</div>
+				)}
+			</div>
 
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <Dialog open={!!selectedProduct} onOpenChange={() => setSelectedProduct(null)}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle className="text-2xl">{selectedProduct.name}</DialogTitle>
-              <DialogDescription>
-                <Badge className="bg-green-600 mr-2">{selectedProduct.category}</Badge>
-                {selectedProduct.featured && <Badge variant="secondary">Featured Product</Badge>}
-              </DialogDescription>
-            </DialogHeader>
+			{/* Product Detail Modal */}
+			{selectedProduct && (
+				<Dialog
+					open={!!selectedProduct}
+					onOpenChange={() => setSelectedProduct(null)}
+				>
+					<DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+						<DialogHeader>
+							<DialogTitle className="text-2xl">
+								{selectedProduct.name}
+							</DialogTitle>
+							<DialogDescription>
+								<Badge className="bg-green-600 mr-2">
+									{selectedProduct.category}
+								</Badge>
+								{selectedProduct.featured && (
+									<Badge variant="secondary">Featured Product</Badge>
+								)}
+							</DialogDescription>
+						</DialogHeader>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Image
-                  src={selectedProduct.image || "/placeholder.svg"}
-                  alt={selectedProduct.name}
-                  width={400}
-                  height={400}
-                  className="w-full h-80 object-cover rounded-lg"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 400px"
-                />
-              </div>
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div>
+								<Image
+									src={selectedProduct.image || "/placeholder.svg"}
+									alt={selectedProduct.name}
+									width={400}
+									height={400}
+									className="w-full h-80 object-cover rounded-lg"
+									priority
+									sizes="(max-width: 768px) 100vw, 400px"
+								/>
+							</div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{selectedProduct.rating}</span>
-                  </div>
-                  <span className="text-gray-500">•</span>
-                  <span className={`text-sm ${selectedProduct.inStock ? "text-green-600" : "text-red-600"}`}>
-                    {selectedProduct.inStock ? "In Stock" : "Out of Stock"}
-                  </span>
-                </div>
+							<div>
+								<div className="flex items-center gap-2 mb-4">
+									<div className="flex items-center gap-1">
+										<Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+										<span className="font-medium">
+											{selectedProduct.rating}
+										</span>
+									</div>
+									<span className="text-gray-500">•</span>
+									<span
+										className={`text-sm ${selectedProduct.inStock ? "text-green-600" : "text-red-600"}`}
+									>
+										{selectedProduct.inStock ? "In Stock" : "Out of Stock"}
+									</span>
+								</div>
 
-                <p className="text-gray-700 mb-6">{selectedProduct.description}</p>
+								<p className="text-gray-700 mb-6">
+									{selectedProduct.description}
+								</p>
 
-                <div className="mb-6">
-                  <div className="text-3xl font-bold text-green-700 mb-1">${selectedProduct.price}</div>
-                  <div className="text-gray-500">{selectedProduct.unit}</div>
-                </div>
+								<div className="mb-6">
+									<div className="text-3xl font-bold text-green-700 mb-1">
+										${selectedProduct.price}
+									</div>
+									<div className="text-gray-500">{selectedProduct.unit}</div>
+								</div>
 
-                <div className="space-y-4 mb-6">
-                  <h4 className="font-semibold text-lg">Specifications</h4>
-                  <div className="grid grid-cols-1 gap-2">
-                    {Object.entries(selectedProduct.specifications).map(([key, value]) => (
-                      <div key={key} className="flex justify-between py-2 border-b border-gray-100">
-                        <span className="text-gray-600">{key}:</span>
-                        <span className="font-medium">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+								<div className="space-y-4 mb-6">
+									<h4 className="font-semibold text-lg">Specifications</h4>
+									<div className="grid grid-cols-1 gap-2">
+										{Object.entries(selectedProduct.specifications).map(
+											([key, value]) => (
+												<div
+													key={key}
+													className="flex justify-between py-2 border-b border-gray-100"
+												>
+													<span className="text-gray-600">{key}:</span>
+													<span className="font-medium">{value}</span>
+												</div>
+											)
+										)}
+									</div>
+								</div>
 
-                <div className="flex gap-3">
-                  <Button
-                    className="flex-1 bg-green-700 hover:bg-green-800"
-                    disabled={!selectedProduct.inStock}
-                    onClick={() => addToCart(selectedProduct)}
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    {selectedProduct.inStock ? "Add to Cart" : "Out of Stock"}
-                  </Button>
-                  <Button variant="outline">Request Quote</Button>
-                </div>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-      )}
-      <Footer />
-    </div>
-  )
+								<div className="flex gap-3">
+									<Button
+										className="flex-1 bg-green-700 hover:bg-green-800"
+										disabled={!selectedProduct.inStock}
+										onClick={() => addToCart(selectedProduct)}
+									>
+										<ShoppingCart className="h-4 w-4 mr-2" />
+										{selectedProduct.inStock ? "Add to Cart" : "Out of Stock"}
+									</Button>
+									<Button variant="outline">Request Quote</Button>
+								</div>
+							</div>
+						</div>
+					</DialogContent>
+				</Dialog>
+			)}
+			<Footer />
+		</div>
+	);
 }
 
 export default ProductsPage
