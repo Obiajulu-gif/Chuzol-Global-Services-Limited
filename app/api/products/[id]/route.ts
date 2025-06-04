@@ -1,9 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { productDb } from "@/lib/database"
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const product = await productDb.findById(params.id)
+    const { id } = await params
+
+    const product = await productDb.findById(id)
 
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
@@ -16,8 +18,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
     const updates = await request.json()
 
     // Convert string numbers to actual numbers
@@ -27,7 +30,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       updates.inStock = updates.stock > 0
     }
 
-    const product = await productDb.update(params.id, updates)
+    const product = await productDb.update(id, updates)
 
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })
@@ -44,9 +47,11 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const success = await productDb.delete(params.id)
+    const { id } = await params
+
+    const success = await productDb.delete(id)
 
     if (!success) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 })

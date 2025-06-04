@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { writeFile } from "fs/promises"
-import { join } from "path"
+import { put } from "@vercel/blob"
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,34 +22,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "File too large. Maximum size is 5MB." }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-
     // Generate unique filename
     const timestamp = Date.now()
     const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_")
-    const filename = `${timestamp}_${originalName}`
+    const filename = `products/${timestamp}_${originalName}`
 
-    // Save to public/uploads directory
-    const uploadDir = join(process.cwd(), "public", "uploads")
-    const filepath = join(uploadDir, filename)
-
-    // Create uploads directory if it doesn't exist
-    try {
-      await writeFile(filepath, buffer)
-    } catch (error) {
-      // If directory doesn't exist, create it
-      const { mkdir } = await import("fs/promises")
-      await mkdir(uploadDir, { recursive: true })
-      await writeFile(filepath, buffer)
-    }
-
-    // Return the public URL
-    const imageUrl = `/uploads/${filename}`
+    // Upload to Vercel Blob
+    const blob = await put(filename, file, {
+      access: "public",
+    })
 
     return NextResponse.json({
       success: true,
-      imageUrl,
+      imageUrl: blob.url,
       message: "File uploaded successfully",
     })
   } catch (error) {
