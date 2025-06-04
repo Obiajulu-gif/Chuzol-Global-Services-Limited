@@ -12,6 +12,7 @@ export interface Admin {
   updatedAt: string
 }
 
+// In the Product interface, make sure image is properly typed
 export interface Product {
   _id?: ObjectId
   id?: number
@@ -19,7 +20,7 @@ export interface Product {
   category: string
   price: number
   unit: string
-  image: string
+  image: string // This will now store the full Vercel Blob URL
   description: string
   specifications: Record<string, string>
   inStock: boolean
@@ -138,6 +139,7 @@ export const adminDb = {
 }
 
 // Product operations
+// Update the create function in productDb to handle the image URL properly
 export const productDb = {
   getAll: async (): Promise<Product[]> => {
     const db = await getDatabase()
@@ -164,6 +166,10 @@ export const productDb = {
       ...productData,
       stock,
       status,
+      // Ensure image URL is stored properly
+      image: productData.image || "/placeholder.svg?height=300&width=300&text=Product+Image",
+      rating: productData.rating || 4.5,
+      inStock: stock > 0,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     }

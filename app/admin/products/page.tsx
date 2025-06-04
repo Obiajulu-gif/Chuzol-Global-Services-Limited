@@ -1,7 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Plus, Search, Filter, Edit, Trash2, Eye, MoreHorizontal, Package } from "lucide-react"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
+import { Plus, Search, Filter, Edit, Trash2, Eye, MoreHorizontal, Package, Upload } from "lucide-react"
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -67,6 +71,7 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories")
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<any | null>(null)
+  const [updating, setUpdating] = useState(false)
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -75,7 +80,13 @@ export default function ProductsPage() {
     stock: "",
     description: "",
     sku: "",
+    image: "",
   })
+
+  const [uploading, setUploading] = useState(false)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const { toast } = useToast()
 
   useEffect(() => {
     fetchProducts()
@@ -100,12 +111,57 @@ export default function ProductsPage() {
     return matchesSearch && matchesCategory
   })
 
-  // Update the handleAddProduct function to include proper specifications
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    try {
+      setUploading(true)
+
+      const formData = new FormData()
+      formData.append("file", file)
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setNewProduct({ ...newProduct, image: data.url })
+        setImagePreview(data.url)
+        toast({
+          title: "Image uploaded successfully",
+          description: "Your product image has been uploaded.",
+          action: <ToastAction altText="OK">OK</ToastAction>,
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Upload failed",
+          description: data.error || "Failed to upload image",
+        })
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error)
+      toast({
+        variant: "destructive",
+        title: "Upload failed",
+        description: "An error occurred while uploading the image",
+      })
+    } finally {
+      setUploading(false)
+    }
+  }
+
   const handleAddProduct = async () => {
     try {
       const productData = {
         ...newProduct,
-        image: "/placeholder.svg?height=300&width=300&text=Product+Image",
+        price: Number.parseFloat(newProduct.price),
+        stock: Number.parseInt(newProduct.stock),
+        image: newProduct.image || "/placeholder.svg?height=300&width=300&text=Product+Image",
         specifications: {
           Origin: "Nigeria",
           "Moisture Content": "< 12%",
@@ -127,15 +183,31 @@ export default function ProductsPage() {
 
       const data = await response.json()
 
-      if (data.success) {
+      if (response.ok && data.success) {
+        toast({
+          title: "Product added successfully!",
+          description: `${productData.name} has been added to your catalog.`,
+          action: <ToastAction altText="OK">OK</ToastAction>,
+        })
+
         await fetchProducts() // Refresh the list
-        setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "" })
+        setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "", image: "" })
+        setImagePreview(null)
         setIsAddDialogOpen(false)
       } else {
-        console.error("Error adding product:", data.error)
+        toast({
+          variant: "destructive",
+          title: "Failed to add product",
+          description: data.error || "An error occurred while adding the product",
+        })
       }
     } catch (error) {
       console.error("Error adding product:", error)
+      toast({
+        variant: "destructive",
+        title: "Failed to add product",
+        description: "Network error occurred while adding the product",
+      })
     }
   }
 
@@ -166,34 +238,71 @@ export default function ProductsPage() {
       stock: product.stock.toString(),
       description: product.description || "",
       sku: product.sku,
+      image: product.image || "",
     })
+    setImagePreview(product.image || null)
     setIsAddDialogOpen(true)
   }
 
   const handleUpdateProduct = async () => {
-    if (!editingProduct) return
+    if (!editingProduct || updating) return
 
     try {
+      setUpdating(true)
+      console.log("Starting update for product:", editingProduct._id)
+
+      const updateData = {
+        ...newProduct,
+        price: Number.parseFloat(newProduct.price),
+        stock: Number.parseInt(newProduct.stock),
+      }
+
       const response = await fetch(`/api/products/${editingProduct._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newProduct),
+        body: JSON.stringify(updateData),
       })
 
       const data = await response.json()
+      console.log("Update response:", { ok: response.ok, data })
 
-      if (data.success) {
-        await fetchProducts() // Refresh the list
-        setEditingProduct(null)
-        setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "" })
+      if (response.ok && data.success) {
+        console.log("Update successful, closing modal...")
+
+        // Close modal and reset form FIRST
         setIsAddDialogOpen(false)
+        setEditingProduct(null)
+        setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "", image: "" })
+        setImagePreview(null)
+
+        // Show success message
+        toast({
+          title: "Product updated successfully!",
+          description: `Product has been updated in your catalog.`,
+          action: <ToastAction altText="OK">OK</ToastAction>,
+        })
+
+        // Refresh the products list in the background
+        await fetchProducts()
       } else {
-        console.error("Error updating product:", data.error)
+        console.log("Update failed:", data.error)
+        toast({
+          variant: "destructive",
+          title: "Failed to update product",
+          description: data.error || "An error occurred while updating the product",
+        })
       }
     } catch (error) {
       console.error("Error updating product:", error)
+      toast({
+        variant: "destructive",
+        title: "Failed to update product",
+        description: "Network error occurred while updating the product",
+      })
+    } finally {
+      setUpdating(false)
     }
   }
 
@@ -281,6 +390,56 @@ export default function ProductsPage() {
                   onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
                 />
               </div>
+              <div className="col-span-2">
+                <Label htmlFor="image">Product Image</Label>
+                <div className="mt-1 flex items-center gap-4">
+                  <div className="relative">
+                    {imagePreview ? (
+                      <div className="h-24 w-24 rounded-md overflow-hidden border border-gray-200">
+                        <img
+                          src={imagePreview || "/placeholder.svg"}
+                          alt="Product preview"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="h-24 w-24 rounded-md bg-gray-100 flex items-center justify-center border border-gray-200">
+                        <Package className="h-8 w-8 text-gray-400" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <input
+                      type="file"
+                      id="image-upload"
+                      ref={fileInputRef}
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="w-full"
+                    >
+                      {uploading ? (
+                        <>
+                          <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-t-transparent"></div>
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="mr-2 h-4 w-4" />
+                          {imagePreview ? "Change Image" : "Upload Image"}
+                        </>
+                      )}
+                    </Button>
+                    <p className="text-xs text-gray-500 mt-1">Recommended: 800x800px, max 5MB</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="flex justify-end space-x-2">
               <Button
@@ -288,7 +447,8 @@ export default function ProductsPage() {
                 onClick={() => {
                   setIsAddDialogOpen(false)
                   setEditingProduct(null)
-                  setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "" })
+                  setNewProduct({ name: "", category: "", price: "", stock: "", description: "", sku: "", image: "" })
+                  setImagePreview(null)
                 }}
               >
                 Cancel
@@ -296,8 +456,18 @@ export default function ProductsPage() {
               <Button
                 onClick={editingProduct ? handleUpdateProduct : handleAddProduct}
                 className="bg-green-700 hover:bg-green-800"
+                disabled={updating || uploading}
               >
-                {editingProduct ? "Update Product" : "Add Product"}
+                {updating ? (
+                  <>
+                    <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    Updating...
+                  </>
+                ) : editingProduct ? (
+                  "Update Product"
+                ) : (
+                  "Add Product"
+                )}
               </Button>
             </div>
           </DialogContent>
@@ -367,9 +537,19 @@ export default function ProductsPage() {
                   <TableRow key={product._id || product.id}>
                     <TableCell>
                       <div className="flex items-center space-x-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
-                          <Package className="h-5 w-5 text-green-600" />
-                        </div>
+                        {product.image && !product.image.includes("placeholder") ? (
+                          <div className="h-10 w-10 rounded-lg overflow-hidden">
+                            <img
+                              src={product.image || "/placeholder.svg"}
+                              alt={product.name}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100">
+                            <Package className="h-5 w-5 text-green-600" />
+                          </div>
+                        )}
                         <div>
                           <div className="font-medium">{product.name}</div>
                         </div>

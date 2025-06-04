@@ -215,7 +215,7 @@ export default function AdminDashboard() {
     }
     reader.readAsDataURL(file)
 
-    // Upload file to server
+    // Upload file to Vercel Blob
     setUploadingImage(true)
     try {
       const formData = new FormData()
@@ -229,8 +229,8 @@ export default function AdminDashboard() {
       const data = await response.json()
 
       if (data.success) {
-        setImageUrl(data.imageUrl)
-        toast.success("Image uploaded successfully!")
+        setImageUrl(data.imageUrl) // This will now be the full Vercel Blob URL
+        toast.success("Image uploaded successfully to cloud storage!")
       } else {
         toast.error(data.error || "Upload failed")
         setSelectedImage(null)
@@ -259,11 +259,11 @@ export default function AdminDashboard() {
 
   const getImageForProduct = () => {
     if (imageSource === "upload" && imageUrl) {
-      return imageUrl
+      return imageUrl // Full Vercel Blob URL
     } else if (imageSource === "url" && imageUrl) {
-      return imageUrl
+      return imageUrl // External URL
     } else if (imageSource === "sample" && selectedSampleImage) {
-      return selectedSampleImage
+      return selectedSampleImage // Local sample image
     }
     return "/placeholder.svg?height=300&width=300&text=Product+Image"
   }
