@@ -11,17 +11,37 @@ if (typeof window === "undefined") {
 }
 
 export const metadata: Metadata = {
-	title:
-		"Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
-	description:
-		"Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
-	icons: {
-		icon: [
-			{ url: "/images/chuzollogo.png" },
-			{ url: "/images/chuzollogo.png", type: "image/png" },
-		],
-		apple: [{ url: "/images/chuzollogo.png" }],
-	},
+  title:
+    "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
+  description:
+    "Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
+  icons: {
+    icon: [
+      { url: "/images/chuzollogo.png" },
+      { url: "/images/chuzollogo.png", type: "image/png" },
+    ],
+    apple: [{ url: "/images/chuzollogo.png" }],
+  },
+  openGraph: {
+    title: "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
+    description:
+      "Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
+    images: [
+      {
+        url: "/images/chuzollogo.png",
+        width: 800,
+        height: 600,
+        alt: "Chuzol Global Service Limited Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
+    description:
+      "Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
+    images: ["/images/chuzollogo.png"],
+  },
 };
 
 export default function RootLayout({
