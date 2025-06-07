@@ -58,7 +58,7 @@ const getStatusText = (status: string) => {
 }
 
 // Add proper status calculation and display
-const getProductStatus = (product: any) => {\
+const getProductStatus = (product: any) => {
   if (product.stock === 0) return "out_of_stock"
   if (product.stock < 10) return "low_stock"
   return "active"
