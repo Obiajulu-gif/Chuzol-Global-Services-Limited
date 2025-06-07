@@ -59,7 +59,15 @@ export default function HomePage() {
   const featuredProducts = [
 		{
 			name: "Premium Bitter Kola",
-			image: "/images/kolanut.jpeg",
+			image: "/images/bitterSachet.jpg",
+			description: "High-quality bitter kola sourced from Nigerian forests",
+			category: "Nuts & Seeds",
+			price: "$25.99",
+			rating: 4.8,
+		},
+		{
+			name: "Bitter Kola",
+			image: "/images/bitterkola.jpg",
 			description: "High-quality bitter kola sourced from Nigerian forests",
 			category: "Nuts & Seeds",
 			price: "$25.99",
