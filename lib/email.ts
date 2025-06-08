@@ -84,7 +84,7 @@ export async function sendContactEmail(formData: {
   try {
     const { data, error } = await resend.emails.send({
       from: "Chuzol Contact Form <noreply@chuzol.com>",
-      to: ["anigbomosesstan@gmail.com"],
+      to: ["chuzolglobal@gmail.com"],
       replyTo: [formData.email],
       subject: `New Contact Form Submission: ${formData.subject}`,
       html: `
