@@ -60,98 +60,48 @@ export default function HomePage() {
     return () => observer.disconnect()
   }, [])
 
-  // Fetch featured products from database
-  useEffect(() => {
-    const fetchFeaturedProducts = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch("/api/products")
-        const data = await response.json()
-
-        if (data.success && data.products && data.products.length > 0) {
-          // Get the first 4 products from the database
-          setFeaturedProducts(data.products.slice(0, 4))
-        } else {
-          // Fallback to default products if no products in database
-          setFeaturedProducts([
-            {
-              name: "Premium Bitter Kola",
-              image: "/images/kolanut.jpeg",
-              description: "High-quality bitter kola sourced from Nigerian forests",
-              category: "Nuts & Seeds",
-              price: 25.99,
-              rating: 4.8,
-            },
-            {
-              name: "Organic SheaNut",
-              image: "/images/sheanut.jpg",
-              description: "Pure, unrefined shea butter from Northern Nigeria",
-              category: "Organic Products",
-              price: 18.5,
-              rating: 4.9,
-            },
-            {
-              name: "Premium Cashew Nuts",
-              image: "/images/cashew1.jpg",
-              description: "Grade A cashew nuts for international markets",
-              category: "Nuts & Seeds",
-              price: 32.0,
-              rating: 4.7,
-            },
-            {
-              name: "Dried Hibiscus Flowers",
-              image: "/images/hibiscut.jpg",
-              description: "Premium quality hibiscus for tea and beverages",
-              category: "Herbs & Spices",
-              price: 12.75,
-              rating: 4.6,
-            },
-          ])
-        }
-      } catch (error) {
-        console.error("Error fetching products:", error)
-        // Use fallback products on error
-        setFeaturedProducts([
-          {
-            name: "Premium Bitter Kola",
-            image: "/images/kolanut.jpeg",
-            description: "High-quality bitter kola sourced from Nigerian forests",
-            category: "Nuts & Seeds",
-            price: 25.99,
-            rating: 4.8,
-          },
-          {
-            name: "Organic SheaNut",
-            image: "/images/sheanut.jpg",
-            description: "Pure, unrefined shea butter from Northern Nigeria",
-            category: "Organic Products",
-            price: 18.5,
-            rating: 4.9,
-          },
-          {
-            name: "Premium Cashew Nuts",
-            image: "/images/cashew1.jpg",
-            description: "Grade A cashew nuts for international markets",
-            category: "Nuts & Seeds",
-            price: 32.0,
-            rating: 4.7,
-          },
-          {
-            name: "Dried Hibiscus Flowers",
-            image: "/images/hibiscut.jpg",
-            description: "Premium quality hibiscus for tea and beverages",
-            category: "Herbs & Spices",
-            price: 12.75,
-            rating: 4.6,
-          },
-        ])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchFeaturedProducts()
-  }, [])
+  const featuredProducts = [
+		{
+			name: "Premium Bitter Kola",
+			image: "/images/bitterSachet.jpg",
+			description: "High-quality bitter kola sourced from Nigerian forests",
+			category: "Nuts & Seeds",
+			price: "$25.99",
+			rating: 4.8,
+		},
+		{
+			name: "Bitter Kola",
+			image: "/images/bitterkola.jpg",
+			description: "High-quality bitter kola sourced from Nigerian forests",
+			category: "Nuts & Seeds",
+			price: "$25.99",
+			rating: 4.8,
+		},
+		{
+			name: "Organic SheaNut",
+			image: "/images/sheanut.jpg",
+			description: "Pure, unrefined shea butter from Northern Nigeria",
+			category: "Organic Products",
+			price: "$18.50",
+			rating: 4.9,
+		},
+		{
+			name: "Premium Cashew Nuts",
+			image: "/images/cashew1.jpg",
+			description: "Grade A cashew nuts for international markets",
+			category: "Nuts & Seeds",
+			price: "$32.00",
+			rating: 4.7,
+		},
+		{
+			name: "Dried Hibiscus Flowers",
+			image: "/images/hibiscut.jpg",
+			description: "Premium quality hibiscus for tea and beverages",
+			category: "Herbs & Spices",
+			price: "$12.75",
+			rating: 4.6,
+		},
+	];
 
   const services = [
     {
