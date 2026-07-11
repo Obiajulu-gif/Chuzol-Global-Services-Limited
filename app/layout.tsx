@@ -11,6 +11,7 @@ if (typeof window === "undefined") {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.chuzol.org"),
   title:
     "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
   description:

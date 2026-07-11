@@ -1,9 +1,12 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart
 
 # Host
-Host: https://www.chuzol.com/
+Host: https://www.chuzol.org/
 
 # Sitemaps
-Sitemap: https://www.chuzol.com/sitemap.xml
+Sitemap: https://www.chuzol.org/sitemap.xml

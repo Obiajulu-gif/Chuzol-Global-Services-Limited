@@ -79,13 +79,13 @@ export default function AboutPage() {
 					content="Learn about Chuzol’s mission, team, and commitment to quality in agricultural exports from Nigeria to the world."
 				/>
 				<meta name="robots" content="index, follow" />
-				<link rel="canonical" href="https://www.chuzol.com/about" />
+				<link rel="canonical" href="https://www.chuzol.org/about" />
 				<meta property="og:title" content="About Chuzol" />
 				<meta
 					property="og:description"
 					content="We are committed to providing world-class agricultural exports with full traceability and top-tier logistics."
 				/>
-				<meta property="og:url" content="https://www.chuzol.com/about" />
+				<meta property="og:url" content="https://www.chuzol.org/about" />
 				<meta property="og:type" content="website" />
 			</Head>
 			<Navbar />
