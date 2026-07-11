@@ -18,10 +18,11 @@ export const metadata: Metadata = {
     "Leading exporter of premium Nigerian agricultural products including bitter kola, shea butter, cashew nuts, and more. Quality guaranteed, globally delivered.",
   icons: {
     icon: [
-      { url: "/images/chuzollogo.png" },
-      { url: "/images/chuzollogo.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-192.png", type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: "/images/chuzollogo.png" }],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     title: "Chuzol Global Service Limited - Premium Nigerian Agricultural Exports",
