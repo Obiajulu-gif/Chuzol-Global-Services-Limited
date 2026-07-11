@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -34,9 +34,7 @@ export default function HomePage() {
   const productsRef = useRef<HTMLDivElement>(null)
   const servicesRef = useRef<HTMLDivElement>(null)
 
-  // State for featured products
-  const [featuredProducts, setFeaturedProducts] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const loading = false
 
   useEffect(() => {
     const observerOptions = {
